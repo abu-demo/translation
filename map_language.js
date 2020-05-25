@@ -1,6 +1,7 @@
 var index = {
-  zhuce: "注册",
-  qingshurushoujihao: "请输入手机号",
-  qingshuruyanzhengma: "请输入验证码",
-  denglumima: "登录密码",
-};
+	qingxuanzeshoukuanfangshi: '请选择收款方式',
+	chongzhijilu: '充值记录',
+	fukuanfangshi: '付款方式',
+	shoukuanzongjine: '收款总金额',
+	liangzhongshoukuan: '请至少选两种收款方式'
+}

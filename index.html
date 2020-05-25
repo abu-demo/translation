@@ -1,66 +1,105 @@
-<!doctype html>
-
-<head>
-    <meta charset="utf-8" />
-</head>
-
-<body>
-    <div>可打开浏览器控制台查看结果</div>
-	
-    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="./md5.js"></script>
-	<script src="./map_language.js"></script>
-    <script type="text/javascript">
-		
-		let prop = [], //属性数组
-			value = [] //属性值数组
-			
-			for(e in index){
-				prop.push(e)
-				value.push(index[e])
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<style type="text/css">
+			span{
+				color: #222222;
 			}
-		console.log(prop)
-		console.log(value)
-		
-        let query = '申请额度/申请额度需大于/实际扣除/提交申请/资料提交成功，请等待系统审核/确认/请输入申请额度/申请额度数量不能小于最小标准/持卡人/请输入持卡人姓名或企业名称/离岸账户/请输入离岸账户地址/所属地区/中国/美国/巴西/日本/香港/确认信息/提示：该信息在确认后无法修改/绑卡成功/转账流水/申请中/申请成功/转账数量/单笔转账不小于/请输入转账数量/可用额度/限时申请/安全快捷  快速支付/剩余额度/已激活/未激活/权益介绍/上传三张微信截图-微信个人资讯页 -朋友圈公开页（显示两个小时以上）-朋友圈个人页（显示日期）信截图-微信。/流程/申请卡片/申请/完成/去转帐/板块即将上线/数币基金/商业消费/交易所/物联网/游戏生态/匿名社交/MOS公链/链上搜索/请输入内容/发布需要向系统支付/图片/最多上传6张/发布成功/只可点赞一次/您每天都有机会分享MOS海报到微信朋友圈，由系统审批通过后将获得100MC奖励/分享海报及文字至微信朋友圈/上传三张微信截图/等待系统审批/微信号/上传截图/请分别上传微信个人资讯页，朋友圈页，朋友圈个人页/提交/参考图例/参考文案/下载海报/资料提交成功/请选择图片/请输入微信号/社区共建提交成功/神经元裂变收益/一级母体收益/二级母体收益/三级母体收益/箱体网络收益/收益/生成记录/确定/后重试/重新获取/分享测试/微信好友/朋友圈/微博/QQ/更多/已复制到剪贴板/图片保存成功!/系统消息/您的广告发布成功/脑力预约成功，请等候排单。/脑力已成功排单。/请在/前完成尾款支付。/收款成功！/脑力购买成功!/收益已达到/倍/已离场！/映射/成功/解除映射/资料审核通过/资料审核不通过/充值成功/成功兑换/消耗/箱体等级升级到/级/签到/社区共建任务审核通过/社区共建任务审核不通过/审核失败/实际到账不可小于10/请输入合适的MOS数量/脑力返利/映射返利/直接裂变/间接裂变/箱体奖励'
-		console.log(query)
-		
-		let fanyi_arr = []
-		
-		function fanyi(query){
-			var appid = '20200317000399931';
-			var key = 'ejSSGPWD6eKfiWR9Wxa2';
-			var salt = (new Date).getTime();
-			// var query = '苹果'; //单词2000以内
-			// 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
-			var str1 = appid + query + salt + key;
-			var sign = MD5(str1);
-			var result = ''
-			$.ajax({
-			    url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
-			    type: 'get',
-			    dataType: 'jsonp',
-			    data: {
-			        q: query,
-			        appid: appid,
-			        salt: salt,
-			        from: 'auto',
-			        to: 'kor',
-			        sign: sign
-			    },
-			    success: function (data) {
-					let fanyi_arr = data.trans_result[0].dst.split('/')
-					console.log(data.trans_result[0].dst.split('/'))
-					for(let i = 0;i<prop.length-1;i++){
-						index[prop[i]] = fanyi_arr[i]
-					}
-					console.log(index) 
-			    }
-			});
-		}
-		fanyi(query)
-		
-		
-		
-    </script>
-</body>
+		</style>
+	</head>
+
+	<body style="padding: 60px;">
+		<span style="font-size: 20px;font-weight: bold;">中文翻译成 </span>
+		<span style="font-size: 18px;font-weight: bold;border-radius:10px ;padding: 5px 10px; margin-left:20px ;outline: none; color: #3e3e3e;border: 2px solid #3e3e3e; background-color: white;"
+		 onclick="search('jp')">日语</span>
+		<span style="font-size: 18px;font-weight: bold;border-radius:10px ;padding: 5px 10px; margin-left:20px ;outline: none; color: #3e3e3e;border: 2px solid #3e3e3e; background-color: white;"
+		 onclick="search('kor')">韩语</span>
+		<span style="font-size: 18px;font-weight: bold;border-radius:10px ;padding: 5px 10px; margin-left:20px ;outline: none; color: #3e3e3e;border: 2px solid #3e3e3e; background-color: white;"
+		 onclick="search('en')">英语</span>
+		 <span style="font-size: 18px;font-weight: bold;border-radius:10px ;padding: 5px 10px; margin-left:20px ;outline: none; color: #3e3e3e;border: 2px solid #3e3e3e; background-color: white;"
+		 onclick="search('th')">泰语</span>
+		 <span style="font-size: 18px;font-weight: bold;border-radius:10px ;padding: 5px 10px; margin-left:20px ;outline: none; color: #3e3e3e;border: 2px solid #3e3e3e; background-color: white;"
+		 onclick="search('vie')">越南语</span>
+		<p id="result" style="margin: 60px 0px;">
+			-- 结果将会渲染在此处 --
+		</p>
+
+		<span class="btn btn-sm btn-default" onclick="copyText()" style="font-size: 18px;font-weight: bold;border-radius:10px ;padding: 5px 10px; margin-left:20px ;outline: none; color: white;border: 2px solid #3e3e3e; background-color: #3e3e3e;">复制结果</span>
+		<span id="copy_success" style="display: none; margin-left: 10px; font-size: 14px;color: #3e3e3e;">复制成功啦! (●’◡’●)ﾉ
+		</span>
+		<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="./md5.js"></script>
+		<script src="./map_language.js"></script>
+		<script type="text/javascript">
+			// 复制翻译结果
+			function copyText() {
+				var Url2 = document.getElementById("result").innerText;
+				var oInput = document.createElement('input');
+				oInput.value = Url2;
+				document.body.appendChild(oInput);
+				oInput.select();
+				document.execCommand("Copy");
+				oInput.className = 'oInput';
+				oInput.style.display = 'none';
+				// 复制成功提醒
+				document.getElementById('copy_success').style.display = "";
+			}
+
+			function search(val) {
+				// 关闭成功提醒
+				document.getElementById('copy_success').style.display = "none";
+
+				let res = {},
+					prop = Object.keys(index), //属性数组
+					value = Object.values(index) //属性值数组
+
+				let query = value.join('\n')
+				// console.log(prop)
+				console.log(value.join('/'))
+
+				function fanyi(query) {
+					var appid = '20200317000399931';
+					var key = 'ejSSGPWD6eKfiWR9Wxa2';
+					var salt = (new Date).getTime();
+					// var query = '苹果'; //单词2000以内
+					// 多个query可以用\n连接  如 query='apple\norange\nbanana\npear'
+					var str1 = appid + query + salt + key;
+					var sign = MD5(str1);
+					var result = ''
+					$.ajax({
+						url: 'http://api.fanyi.baidu.com/api/trans/vip/translate',
+						type: 'get',
+						dataType: 'jsonp',
+						data: {
+							q: query,
+							appid: appid,
+							salt: salt,
+							from: 'zh',
+							to: val,
+							sign: sign
+						},
+						success: function(data) {
+							let fanyi_arr = data.trans_result
+							// console.log(data.trans_result)
+							for (let i = 0; i < prop.length; i++) {
+								res[prop[i]] = fanyi_arr[i].dst
+							}
+							let str = JSON.stringify(res);
+							// 去{}
+							str = str.slice(1, -1);
+							// 去属性的双引号
+							str = str.replace(/"([^"]*)":/g, "$1:");
+							document.getElementById('result').innerHTML = str;
+							console.log(res)
+						}
+					});
+
+				}
+
+				fanyi(query)
+			}
+		</script>
+	</body>
+
+</html>
